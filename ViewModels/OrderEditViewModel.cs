@@ -137,6 +137,13 @@ namespace PrintOrderManager.ViewModels
 
             using (var db = new AppDbContext())
             {
+                // Xử lý để tránh EF Core cố gắng chèn mới Material/Process đã tồn tại
+                foreach (var item in Items)
+                {
+                    item.Material = null;
+                    item.Process = null;
+                }
+
                 if (_orderId.HasValue)
                 {
                     var existingOrder = db.Orders.Include(o => o.OrderItems).FirstOrDefault(o => o.Id == _orderId.Value);
