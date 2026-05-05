@@ -47,10 +47,32 @@
                   materialDesign:DataGridAssist.CellPadding="12 8">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Mã ĐH" Binding="{Binding Id}" Width="80"/>
-                <DataGridTextColumn Header="Ngày" Binding="{Binding OrderDate, StringFormat=dd/MM/yyyy HH:mm}" Width="150"/>
+                <DataGridTextColumn Header="Ngày" Binding="{Binding OrderDate, StringFormat=dd/MM/yyyy}" Width="120"/>
                 <DataGridTextColumn Header="Ghi chú" Binding="{Binding Note}" Width="*"/>
                 <DataGridTextColumn Header="Tổng tiền" Binding="{Binding TotalAmount, StringFormat={}{0:N0}}" Width="150" ElementStyle="{StaticResource MaterialDesignDataGridTextColumnRightAlignment}"/>
             </DataGrid.Columns>
+
+            <!-- Chi tiết các sản phẩm trong đơn hàng khi click chọn dòng -->
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Border Background="{DynamicResource MaterialDesignDivider}" Padding="10">
+                        <StackPanel>
+                            <TextBlock Text="CHI TIẾT SẢN PHẨM" FontWeight="Bold" Margin="0,0,0,5"/>
+                            <DataGrid ItemsSource="{Binding OrderItems}" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="Tên sản phẩm" Binding="{Binding ProductName}" Width="200"/>
+                                    <DataGridTextColumn Header="Kích thước" Binding="{Binding Size}" Width="100"/>
+                                    <DataGridTextColumn Header="Chất liệu" Binding="{Binding Material.Name}" Width="120"/>
+                                    <DataGridTextColumn Header="Gia công" Binding="{Binding Process.Name}" Width="120"/>
+                                    <DataGridTextColumn Header="Số lượng" Binding="{Binding Quantity, StringFormat={}{0:N0}}" Width="80"/>
+                                    <DataGridTextColumn Header="Đơn giá" Binding="{Binding UnitPrice, StringFormat={}{0:N0}}" Width="100"/>
+                                    <DataGridTextColumn Header="Thành tiền" Binding="{Binding Amount, StringFormat={}{0:N0}}" Width="120"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
         </DataGrid>
     </Grid>
 </Window>
