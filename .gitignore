@@ -1,0 +1,11 @@
+# .gitignore
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.db
+*.xlsx
+.vs/
+.vscode/
+/Backups/
+/Exports/

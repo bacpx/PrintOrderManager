@@ -1,0 +1,56 @@
+<Window x:Class="PrintOrderManager.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Quản Lý Đơn Hàng In Ấn" Height="600" Width="900"
+        WindowStartupLocation="CenterScreen"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ToolBar -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,16">
+            <Button Command="{Binding AddOrderCommand}" Content="Thêm mới" Margin="0,0,8,0" Style="{StaticResource MaterialDesignRaisedButton}"/>
+            <Button Command="{Binding EditOrderCommand}" CommandParameter="{Binding SelectedItem, ElementName=OrdersDataGrid}" Content="Sửa" Margin="0,0,8,0" Style="{StaticResource MaterialDesignOutlinedButton}"/>
+            <Button Command="{Binding DeleteOrderCommand}" CommandParameter="{Binding SelectedItem, ElementName=OrdersDataGrid}" Content="Xóa" Margin="0,0,16,0" Style="{StaticResource MaterialDesignOutlinedButton}" Foreground="Red" BorderBrush="Red"/>
+            
+            <TextBlock Text="Ngày:" VerticalAlignment="Center" Margin="0,0,8,0"/>
+            <DatePicker SelectedDate="{Binding SearchDate}" Width="120" Margin="0,0,8,0" materialDesign:HintAssist.Hint="Chọn ngày"/>
+            <Button Command="{Binding SearchCommand}" Content="Tìm kiếm" Margin="0,0,8,0" Style="{StaticResource MaterialDesignFlatButton}"/>
+            <Button Command="{Binding ClearSearchCommand}" Content="Bỏ lọc" Margin="0,0,16,0" Style="{StaticResource MaterialDesignFlatButton}"/>
+
+            <Button Command="{Binding ExportExcelCommand}" Content="Xuất Excel" Margin="0,0,8,0" Style="{StaticResource MaterialDesignRaisedSecondaryButton}"/>
+            <Button Command="{Binding BackupDatabaseCommand}" Content="Backup DB" Style="{StaticResource MaterialDesignFlatSecondaryButton}"/>
+        </StackPanel>
+
+        <!-- DataGrid -->
+        <DataGrid Grid.Row="1" x:Name="OrdersDataGrid" 
+                  ItemsSource="{Binding Orders}" 
+                  AutoGenerateColumns="False" 
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  HeadersVisibility="Column"
+                  materialDesign:DataGridAssist.CellPadding="12 8">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Mã ĐH" Binding="{Binding Id}" Width="80"/>
+                <DataGridTextColumn Header="Ngày" Binding="{Binding OrderDate, StringFormat=dd/MM/yyyy HH:mm}" Width="150"/>
+                <DataGridTextColumn Header="Ghi chú" Binding="{Binding Note}" Width="*"/>
+                <DataGridTextColumn Header="Tổng tiền" Binding="{Binding TotalAmount, StringFormat={}{0:N0}}" Width="150" ElementStyle="{StaticResource MaterialDesignDataGridTextColumnRightAlignment}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
