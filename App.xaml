@@ -9,6 +9,12 @@
                 <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <!-- Style căn lề phải cho cột số liệu trong DataGrid -->
+            <Style x:Key="MaterialDesignDataGridTextColumnRightAlignment" TargetType="TextBlock">
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="Margin" Value="0,0,8,0" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
