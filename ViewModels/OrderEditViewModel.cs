@@ -137,9 +137,12 @@ namespace PrintOrderManager.ViewModels
 
             using (var db = new AppDbContext())
             {
-                // Xử lý để tránh EF Core cố gắng chèn mới Material/Process đã tồn tại
                 foreach (var item in Items)
                 {
+                    // Giữ lại ID nhưng gán null cho object để EF không cố chèn mới master data
+                    if (item.Material != null) item.MaterialId = item.Material.Id;
+                    if (item.Process != null) item.ProcessId = item.Process.Id;
+                    
                     item.Material = null;
                     item.Process = null;
                 }
@@ -156,7 +159,7 @@ namespace PrintOrderManager.ViewModels
                         db.OrderItems.RemoveRange(existingOrder.OrderItems);
                         foreach (var item in Items)
                         {
-                            item.Id = 0; // Reset Id for EF to track as new
+                            item.Id = 0; 
                             existingOrder.OrderItems.Add(item);
                         }
                     }

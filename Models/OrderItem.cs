@@ -30,7 +30,7 @@ namespace PrintOrderManager.Models
             set 
             { 
                 _material = value; 
-                MaterialId = value?.Id;
+                if (value != null) MaterialId = value.Id;
                 OnPropertyChanged(); 
             } 
         }
@@ -43,7 +43,7 @@ namespace PrintOrderManager.Models
             set 
             { 
                 _process = value; 
-                ProcessId = value?.Id;
+                if (value != null) ProcessId = value.Id;
                 OnPropertyChanged(); 
             } 
         }
