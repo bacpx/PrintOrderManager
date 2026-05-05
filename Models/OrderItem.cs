@@ -22,21 +22,31 @@ namespace PrintOrderManager.Models
             set { _size = value; OnPropertyChanged(); } 
         }
 
-        private int? _materialId;
-        public int? MaterialId 
+        public int? MaterialId { get; set; }
+        private Material? _material;
+        public virtual Material? Material 
         { 
-            get => _materialId; 
-            set { _materialId = value; OnPropertyChanged(); } 
+            get => _material; 
+            set 
+            { 
+                _material = value; 
+                MaterialId = value?.Id;
+                OnPropertyChanged(); 
+            } 
         }
-        public virtual Material? Material { get; set; }
 
-        private int? _processId;
-        public int? ProcessId 
+        public int? ProcessId { get; set; }
+        private Process? _process;
+        public virtual Process? Process 
         { 
-            get => _processId; 
-            set { _processId = value; OnPropertyChanged(); } 
+            get => _process; 
+            set 
+            { 
+                _process = value; 
+                ProcessId = value?.Id;
+                OnPropertyChanged(); 
+            } 
         }
-        public virtual Process? Process { get; set; }
 
         private int _quantity;
         public int Quantity 

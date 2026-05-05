@@ -61,8 +61,8 @@
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
                             <ComboBox ItemsSource="{Binding DataContext.Materials, RelativeSource={RelativeSource AncestorType=Window}}"
-                                      DisplayMemberPath="Name" SelectedValuePath="Id"
-                                      SelectedValue="{Binding MaterialId, UpdateSourceTrigger=PropertyChanged}"/>
+                                      DisplayMemberPath="Name"
+                                      SelectedItem="{Binding Material, UpdateSourceTrigger=PropertyChanged}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
@@ -76,8 +76,8 @@
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
                             <ComboBox ItemsSource="{Binding DataContext.Processes, RelativeSource={RelativeSource AncestorType=Window}}"
-                                      DisplayMemberPath="Name" SelectedValuePath="Id"
-                                      SelectedValue="{Binding ProcessId, UpdateSourceTrigger=PropertyChanged}"/>
+                                      DisplayMemberPath="Name"
+                                      SelectedItem="{Binding Process, UpdateSourceTrigger=PropertyChanged}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
