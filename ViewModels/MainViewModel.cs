@@ -33,6 +33,7 @@ namespace PrintOrderManager.ViewModels
         public RelayCommand DeleteOrderCommand { get; set; }
         public RelayCommand ExportExcelCommand { get; set; }
         public RelayCommand BackupDatabaseCommand { get; set; }
+        public RelayCommand OpenMasterDataCommand { get; set; }
 
         public MainViewModel()
         {
@@ -43,15 +44,26 @@ namespace PrintOrderManager.ViewModels
             DeleteOrderCommand = new RelayCommand(DeleteOrder, CanEditOrDelete);
             ExportExcelCommand = new RelayCommand(_ => ExportExcel());
             BackupDatabaseCommand = new RelayCommand(_ => BackupDatabase());
+            OpenMasterDataCommand = new RelayCommand(_ => OpenMasterData());
 
             LoadOrders();
+        }
+
+        private void OpenMasterData()
+        {
+            var masterDataWindow = new MasterDataWindow();
+            masterDataWindow.ShowDialog();
         }
 
         private void LoadOrders()
         {
             using (var db = new AppDbContext())
             {
-                var query = db.Orders.Include(o => o.OrderItems).AsQueryable();
+                var query = db.Orders.Include(o => o.OrderItems)
+                                     .ThenInclude(i => i.Material)
+                                     .Include(o => o.OrderItems)
+                                     .ThenInclude(i => i.Process)
+                                     .AsQueryable();
 
                 if (SearchDate.HasValue)
                 {

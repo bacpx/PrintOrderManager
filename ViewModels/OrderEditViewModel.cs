@@ -68,7 +68,11 @@ namespace PrintOrderManager.ViewModels
 
                 if (_orderId.HasValue)
                 {
-                    var order = db.Orders.Include(o => o.OrderItems).FirstOrDefault(o => o.Id == _orderId.Value);
+                    var order = db.Orders.Include(o => o.OrderItems)
+                                         .ThenInclude(i => i.Material)
+                                         .Include(o => o.OrderItems)
+                                         .ThenInclude(i => i.Process)
+                                         .FirstOrDefault(o => o.Id == _orderId.Value);
                     if (order != null)
                     {
                         CurrentOrder = order;

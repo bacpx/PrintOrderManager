@@ -26,6 +26,7 @@
             <Button Command="{Binding AddOrderCommand}" Content="Thêm mới" Margin="0,0,8,0" Style="{StaticResource MaterialDesignRaisedButton}"/>
             <Button Command="{Binding EditOrderCommand}" CommandParameter="{Binding SelectedItem, ElementName=OrdersDataGrid}" Content="Sửa" Margin="0,0,8,0" Style="{StaticResource MaterialDesignOutlinedButton}"/>
             <Button Command="{Binding DeleteOrderCommand}" CommandParameter="{Binding SelectedItem, ElementName=OrdersDataGrid}" Content="Xóa" Margin="0,0,16,0" Style="{StaticResource MaterialDesignOutlinedButton}" Foreground="Red" BorderBrush="Red"/>
+            <Button Command="{Binding OpenMasterDataCommand}" Content="Danh mục" Margin="0,0,16,0" Style="{StaticResource MaterialDesignOutlinedButton}"/>
             
             <TextBlock Text="Ngày:" VerticalAlignment="Center" Margin="0,0,8,0"/>
             <DatePicker SelectedDate="{Binding SearchDate}" Width="120" Margin="0,0,8,0" materialDesign:HintAssist.Hint="Chọn ngày"/>
